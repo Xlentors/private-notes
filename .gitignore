@@ -1,0 +1,12 @@
+# Virtual environment
+venv/
+
+# Python-generated files
+__pycache__/
+*.pyc
+
+# Local SQLite database
+db.sqlite3
+
+# macOS files
+.DS_Store
