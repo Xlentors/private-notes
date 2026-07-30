@@ -5,6 +5,10 @@
 {% block content %}
     <h2>Notes</h2>
 
+    <p>
+        <a href="{% url 'note_create'%}">Create note</a>
+    </p>
+
     <ul>
         {% for note in notes %}
             <li>

@@ -8,6 +8,11 @@
         <p>{{ note.body }}</p>
         <p>Created: {{ note.created_at }}</p>
         <p>Updated: {{ note.updated_at }}</p>
+
+
+        <p>
+            <a href="{% url 'note_edit' note.id %}">Edit Note</a>
+        </p>
     </article>
 
     <p>
