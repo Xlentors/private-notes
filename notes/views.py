@@ -6,7 +6,7 @@ from .models import Note
 
 @login_required
 def note_list(request):
-    notes = Note.objects.all()
+    notes = Note.objects.filter(owner=request.user)
     
     return render(
         request,
@@ -16,7 +16,7 @@ def note_list(request):
 
 @login_required
 def note_detail(request, note_id):
-    note = get_object_or_404(Note, id=note_id)
+    note = get_object_or_404(Note, id=note_id, owner=request.user)
     
     return render(
         request,
@@ -30,7 +30,9 @@ def note_create(request):
         form = NoteForm(request.POST)
         
         if form.is_valid():
-            note = form.save()
+            note = form.save(commit=False)
+            note.owner = request.user
+            note.save()
             
             return redirect("note_detail", note_id=note.id)
     else:
@@ -47,7 +49,7 @@ def note_create(request):
 
 @login_required
 def note_edit(request, note_id):
-    note = get_object_or_404(Note, id=note_id)
+    note = get_object_or_404(Note, id=note_id, owner=request.user)
     
     if request.method == "POST":
         form = NoteForm(request.POST, instance=note)
@@ -70,7 +72,7 @@ def note_edit(request, note_id):
     
 @login_required
 def note_delete(request, note_id):
-    note = get_object_or_404(Note, id=note_id)
+    note = get_object_or_404(Note, id=note_id, owner=request.user)
     
     if request.method == "POST":
         note.delete()
