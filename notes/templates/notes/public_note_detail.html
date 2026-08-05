@@ -1,0 +1,12 @@
+{% extends "notes/base.html" %}
+
+{% block title %} {{ note.title }} {% endblock %}
+
+{% block content %}
+<article>
+    <h1> Public Note </h1>
+    <h2> {{ note.title }} </h2>
+    <p> {{ note.body }} </p>
+    <p> Shared by: {{ note.owner.username }}</p>
+</article>
+{% endblock %}

@@ -84,6 +84,16 @@ def note_delete(request, note_id):
         "notes/note_confirm_delete.html",
         {"note": note}
     )
+    
+def public_note_detail(request, note_id):
+    note = get_object_or_404(Note, id=note_id, is_public=True)
+    
+    return render(
+        request,
+        "notes/public_note_detail.html",
+        {"note": note}
+    )
+    
         
     
     

@@ -9,6 +9,16 @@
         <p>Created: {{ note.created_at }}</p>
         <p>Updated: {{ note.updated_at }}</p>
 
+        {% if note.is_public %}
+        <p> Status: Public </p>
+        <p>
+            <a href="{% url 'public_note_detail' note.id %}">
+                View public version
+            </a>
+        </p>
+        {% else %}
+        <p> Status: Private </p>
+        {% endif %}
 
         <p>
             <a href="{% url 'note_edit' note.id %}">Edit Note</a>

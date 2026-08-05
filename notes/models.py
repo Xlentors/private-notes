@@ -8,8 +8,10 @@ class Note(models.Model):
         on_delete=models.CASCADE,
         related_name = "notes",
     )
+    
     title = models.CharField(max_length=200)
     body = models.TextField()
+    is_public = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
