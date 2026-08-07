@@ -11,6 +11,10 @@ This project is a simple Django application for creating and managing personal n
 - Share public notes without login
 - Users cannot edit/delete notes they don't own
 
+## Live Site
+
+[https://coffeenotes.page](https://coffeenotes.page)
+
 ## Local Setup
 
 1. Clone the repository:
@@ -51,7 +55,7 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-Open `http://127.0.0.1:8000/notes/` in your browser.
+Open `http://127.0.0.1:8000/` in your browser.
 
 ## Stack
 
@@ -59,6 +63,10 @@ Open `http://127.0.0.1:8000/notes/` in your browser.
 - Django
 - SQLite
 - Django templates
+
+## Production Architecture
+
+The production is running on Google Cloud Run. Application data is stored in Neon PostgreSQL. Sensitive configuration such as the database URL and Django secret key is stored in Google Secret Manager.
 
 ## Running Tests
 
