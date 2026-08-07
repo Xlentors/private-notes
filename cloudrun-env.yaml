@@ -1,0 +1,3 @@
+DEBUG: "False"
+ALLOWED_HOSTS: ".run.app,coffeenotes.page,www.coffeenotes.page"
+CSRF_TRUSTED_ORIGINS: "https://*.run.app,https://coffeenotes.page,https://www.coffeenotes.page"
