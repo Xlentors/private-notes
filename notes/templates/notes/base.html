@@ -1,31 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name = "viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Private Notes{% endblock %}</title>
-    <style>
-        body {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 0 20px;
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #222;
-        }
-
-        header {
-            padding-bottom: 16px;
-            margin-bottom: 32px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        nav {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'notes/styles.css' %}">
 </head>
 <body>
     <header>

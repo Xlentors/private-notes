@@ -5,9 +5,7 @@
 {% block content %}
     <h2>Notes</h2>
 
-    <p>
-        <a href="{% url 'note_create' %}">Create note</a>
-    </p>
+   <a class="action-button action-create" href="{% url 'note_create' %}"> Create note </a>
 
     <ul>
         {% for note in notes %}

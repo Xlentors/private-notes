@@ -5,31 +5,50 @@
 {% block content %}
     <article>
         <h2>{{ note.title }}</h2>
-        <p>{{ note.body }}</p>
-        <p>Created: {{ note.created_at }}</p>
-        <p>Updated: {{ note.updated_at }}</p>
 
-        {% if note.is_public %}
-        <p> Status: Public </p>
-        <p>
-            <a href="{% url 'public_note_detail' note.id %}">
-                View public version
-            </a>
+        <p>{{ note.body|linebreaksbr }}</p>
+
+        <p class="note-meta">
+            Created: {{ note.created_at }}<br>
+            Updated: {{ note.updated_at }}<br>
+            Status:
+            {% if note.is_public %}
+                Public
+            {% else %}
+                Private
+            {% endif %}
         </p>
-        {% else %}
-        <p> Status: Private </p>
+
+    <p class="note-actions">
+        {% if note.is_public %}
+            <a
+                class="action-button action-public"
+                href="{% url 'public_note_detail' note.id %}"
+            >
+                Public version
+            </a>
         {% endif %}
 
-        <p>
-            <a href="{% url 'note_edit' note.id %}">Edit Note</a>
-        </p>
+        <a
+            class="action-button action-edit"
+            href="{% url 'note_edit' note.id %}"
+        >
+            Edit
+        </a>
 
-        <p>
-            <a href="{% url 'note_delete' note.id %}">Delete Note</a>
-        </p>
-    </article>
+        <a
+            class="action-button action-delete"
+            href="{% url 'note_delete' note.id %}"
+        >
+            Delete
+        </a>
 
-    <p>
-        <a href="{% url 'note_list' %}">Back to notes</a>
+        <a
+            class="action-button action-back"
+            href="{% url 'note_list' %}"
+        >
+            Back to notes
+        </a>
     </p>
+    </article>
 {% endblock %}
