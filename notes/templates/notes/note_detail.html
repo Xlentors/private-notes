@@ -11,8 +11,9 @@
         <section>
             <ul class="checklist-items">
                 {% for item in note.checklist_items.all %}
-                <li>
+                <li class="checklist-row">
                     <form
+                        class="checklist-toggle-form"
                         method="post"
                         action="{% url 'checklist_item_toggle' item.id %}"
                     >
@@ -28,23 +29,33 @@
                     </form>
 
                     <form
+                        class="checklist-delete-form"
                         method="post"
                         action="{% url 'checklist_item_delete' item.id %}"
                         onsubmit="return confirm('Delete this checklist item?')"
                     >
                         {% csrf_token %}
-                        <button type="submit">Delete</button>
+                        <button
+                            class="checklist-delete-button"
+                            type="submit"
+                            aria-label="Delete {{ item.text }}"
+                        >
+                            x
+                        </button>
                     </form>
                 </li>
                 {% empty %}
                     <li>No checklist items yet.</li>
                 {% endfor %}
             </ul>
-            <form method="post" action="{% url 'checklist_item_create' note.id %}">
+            <form
+                class="checklist-add-form"
+                method="post"
+                action="{% url 'checklist_item_create' note.id %}"
+            >
                 {% csrf_token %}
-                {{ checklist_form.as_p }}
-
-                <button type="submit">Add item</button>
+                {{ checklist_form.text }}
+                <button type="submit">Add</button>
             </form>
         </section>
 
