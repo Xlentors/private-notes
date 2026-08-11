@@ -7,6 +7,24 @@
     <h1> Public Note </h1>
     <h2> {{ note.title }} </h2>
     <p> {{ note.body }} </p>
+    <section>
+        <ul class="checklist-items">
+            {% for item in note.checklist_items.all %}
+            <li>
+                <input
+                    type="checkbox"
+                    {% if item.is_completed%}checked{% endif %}
+                    disabled
+                >
+                {{ item.text }}
+            </li>
+            {% empty %}
+                <li> No checklist items. </li>
+            {% endfor %}
+        </ul>
+    </section>
+
     <p> Shared by: {{ note.owner.username }}</p>
+
 </article>
 {% endblock %}
