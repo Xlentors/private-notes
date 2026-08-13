@@ -5,6 +5,11 @@ from .models import Note, ChecklistItem
 class NoteForm(forms.ModelForm):
     class Meta:
         model = Note
+        fields = ["title", "body"]
+
+class ShareableNoteForm(forms.ModelForm):
+    class Meta:
+        model = Note
         fields = ["title", "body", "is_public"]
 
 class ChecklistItemForm(forms.ModelForm):

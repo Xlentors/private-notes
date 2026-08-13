@@ -129,3 +129,56 @@ class NoteAccessTests(TestCase):
         delete_response = self.client.post(delete_url)
         self.assertEqual(delete_response.status_code, 404)
         self.assertTrue(ChecklistItem.objects.filter(id=self.checklist_item_two.id).exists())
+
+    def test_user_can_create_an_account(self):
+        response = self.client.post(
+            reverse("signup"),
+            {
+                "username": "new_user",
+                "password1": "Strongpassword123!",
+                "password2": "Strongpassword123!",
+            }
+        )
+
+        self.assertRedirects(
+            response,
+            reverse("note_list"),
+        )
+
+        User = get_user_model()
+
+        account_exists = User.objects.filter(
+            username="new_user",
+        ).exists()
+
+        self.assertTrue(account_exists)
+
+        self.assertTrue(
+            response.wsgi_request.user.is_authenticated
+        )
+
+    def test_user_without_permission_cannot_publish_note(self):
+        self.client.login(
+            username="user_one",
+            password="test-password",
+        )
+
+        response = self.client.post(
+            reverse("note_create"),
+            {
+                "title": "Attempted Public Note",
+                "body": "This should remain private.",
+                "is_public": "on",
+            },
+        )
+
+        note = Note.objects.get(
+            owner=self.user_one,
+            title="Attempted Public Note",
+        )
+
+        self.assertRedirects(
+            response,
+            reverse("note_detail", args=[note.id]),
+        )
+        self.assertFalse(note.is_public)
